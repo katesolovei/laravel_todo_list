@@ -21,7 +21,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $tasks = new Task;
+        $tasks::where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->get()->toArray();
+//$tasks = Task::all();
+        dd($tasks);
         return view('home', ['tasks' => $tasks]);
     }
 
@@ -32,10 +35,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        (session()->has('success')) ? $show = 'home' : $show = 'add';
-        $tasks = Task::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return view($show, compact($tasks));
-//        return view($show);
+        return view('add');
     }
 
     /**
@@ -68,6 +68,8 @@ class TaskController extends Controller
         $task->save();
 
         return back()->with('success', 'Task created successfully');
+//        $tasks = Task::where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->get();
+//        return view('home', compact($tasks));
     }
 
     /**

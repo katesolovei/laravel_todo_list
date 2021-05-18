@@ -6,20 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\HomeController;
 
 class Task extends Model
 {
     use HasFactory;
+
     protected $fillable =[
-        'title',
-        'description',
-        'priority',
-        'status',
-        'user_id',
-        'parent'
+        'title', 'description', 'priority', 'status', 'user_id', 'parent'
     ];
 
-//    protected $guarded = [];
+    protected $guarded = [];
 
     public function user()
     {

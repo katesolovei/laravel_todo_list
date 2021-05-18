@@ -18,12 +18,29 @@
                         @endif
                             <input id="title" type="search" class="form-control @error('search') is-invalid @enderror" name="search" value="{{ old('search') }}" placeholder="Search" >
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                        @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
                         <table class="table table-hover table-borderless">
                             <thead>
                             <th scope="col">Task</th>
                             <th scope="col"></th>
                             </thead>
                             <tbody>
+                            @method('post')
                             @forelse ($tasks as $task)
                                 <tr class="table-bordered">
                                     @if ($task->status)

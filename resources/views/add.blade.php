@@ -25,7 +25,7 @@
                         @endif
 
                         @if(session()->has('success'))
-                                {{ route('tasks') }}
+                                {{  view('home') }}
                         @endif
 
                         <form method="POST" action="{{ route('dashboard.store') }}">
